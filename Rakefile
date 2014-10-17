@@ -8,6 +8,8 @@ task :test do
 end
 
 def test
+  sh %[sudo DevToolsSecurity --enable]
+  sh %[sudo security authorizationdb write system.privilege.taskport is-developer]
   sh %[xcodebuild -workspace UIAutomation.xcworkspace -scheme UIAutomation -sdk iphonesimulator -configuration Debug build CONFIGURATION_BUILD_DIR=#{BUILD_DIR}]
-  sh %[instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/AutomationInstrument.xrplugin/Contents/Resources/Automation.tracetemplate -w "iPhone 6 Plus (8.0 Simulator)" #{BUILD_DIR}/UIAutomation.app -e UIASCRIPT "./tests.js"]
+  sh %[instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/AutomationInstrument.xrplugin/Contents/Resources/Automation.tracetemplate -w "D5EE0F11-BDC4-4E64-A28D-9B00C70ADD0A" #{BUILD_DIR}/UIAutomation.app -e UIASCRIPT "./tests.js"]
 end
